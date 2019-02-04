@@ -18,7 +18,7 @@
         //$password = test_input($_POST["password"]);
         $consulta = "select * from usuarios where ";
         if ($nombre != "") {
-            $consulta .= "nombre like '*".$nombre . "*' and ";
+            $consulta .= "nombre like '*". $nombre . "*' and ";
         }
         $consulta .= " dni = '" . $dni ."' and baja is null";
         //echo $consulta;
