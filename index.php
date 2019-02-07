@@ -49,15 +49,17 @@
         return $data;
     }
     ?>
+    <div id=formulario>
     <h2>Iniciar sesión</h2>
     <form method='post' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
     <label for="usuario"><b>DNI</b></label> 
     <input type='text' placeholder="Introduzca su DNI" name='usuario' required><br>
     <label for="password"><b>Contraseña</b> 
     <input type='password' placeholder="Introduzca su contraseña" name='password' required><br>
-    <button type='submit' name='Entrar'><br>
+    <button type='submit'>Entrar</button><br>
     <a href='cambio_clave.php'>He olvidado mi contraseña</a>
     </form>
+</div>
 
 <!-- <?php
 

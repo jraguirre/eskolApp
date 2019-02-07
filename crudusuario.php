@@ -9,6 +9,7 @@
 </head>
 <body>
     <?php session_start()?>
+    <div id=formulario>
     <h2>Mantenimiento de Usuarios</h2>
     <form id="form" method='post' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
     Nombre: <input type='text' name='nombre'/><br>
@@ -40,6 +41,7 @@
     <button type='button' onclick='anterior()'><</button>
     <button type='button' onclick='siguiente()'>></button><br>
     </form> 
+    </div>
     <script src="main.js"></script>  
 </body>
 </html>

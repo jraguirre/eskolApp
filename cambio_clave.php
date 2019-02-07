@@ -1,4 +1,3 @@
-<!<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,7 +12,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = test_input($_POST["email"]);
         $mensaje = random_bytes(200);
-        mail ($email, $"eskolApp: Cambio de contraseña.","http://192.168.0.16:8080/proyecto/reset_password.php");
+        mail ($email, "eskolApp: Cambio de contraseña.","http://gold-preserver.000webhostapp.com/proyecto/reset_password.php");
     }
 
     function test_input($data) {
@@ -22,11 +21,14 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-    ?>    
+    ?>
+    <div id=formulario>    
     <h2>Cambio de contraseña</h2>
     <form method='post' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
-    Dirección de correo: <input type='text' name='email'/><br>
-    <input type='submit' name='Entrar'/><br>
+    <label for="email"><b>Dirección de correo</b>
+    <input type='text' name='email'placeholder="Introduzca su dirección de correo" required><br>
+    <button type='submit'>Enviar</button><br>
     </form>
+</div>
 </body>
 </html>
