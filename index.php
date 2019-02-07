@@ -60,14 +60,5 @@
     <a href='cambio_clave.php'>He olvidado mi contraseña</a>
     </form>
 </div>
-
-<!-- <?php
-
-echo "<h2>Your Input:</h2>";
-echo $usuario;
-echo "<br>";
-echo $password;
-?> -->
-
     </body>
     </html>
