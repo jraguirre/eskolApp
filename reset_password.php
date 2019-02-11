@@ -1,4 +1,16 @@
-<<!DOCTYPE html>
+<?php
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+//Comprobar tokens.
+$selector = test_input($_GET["selector"]);
+$validator = test_input($_GET["validator"]);
+
+if(false !== ctype_xdigit($selector) && false !== ctype_xdigit($validator)) :
+?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -13,12 +25,16 @@
 </body>
 </html>
        <div id=formulario>    
-       <h2>Restablecer de contraseña</h2>
-       <form method='post' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
+       <h2>Restablecer contraseña</h2>
+       <form method='post' action='resetear_password.php'>
+       <input type="hidden" name="selector" value=<?php echo $selector; ?>">
+       <input type="hidden" name="validator" value=<?php echo $validator; ?>">
        <label for="password1"><b>Contraseña</b>
        <input type='password' name='password1'placeholder="Introduzca su contraseña" required><br>
-       <label for="password2"><b>Confirmación</b>
-       <input type='password' name='password2'placeholder="Repita su contraseña" required><br>
+       <!-- <label for="password2"><b>Confirmación</b>
+       <input type='password' name='password2'placeholder="Repita su contraseña" required><br> -->
        <button type='submit'>Enviar</button><br>
        </form>
+       <p><a href = "index.php">Iniciar sesión</a></p>
    </div>
+<?php endif; ?>

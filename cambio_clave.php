@@ -46,6 +46,7 @@
                     $mensaje .= "Si no realizó esta petición, por favor, ignore este mensaje</p>";
                     $mensaje .= "<p>Para restablecer su contraseña, siga el siguiente ";
                     $mensaje .= "<a href=".$url.">enlace</a></p>";
+                    $mensaje .= "<p>Este enlace sólo es válido durante una hora.<p>";
                     $mensaje .= "<p>Gracias</p><p>eskolApp</p>";
                     
                     $cabeceras = "From: Juan Ramón Aguirre <8513634@us-imm-node4c.000webhost.io>\r\n";
@@ -60,7 +61,7 @@
                 }
  
                 ?>
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">

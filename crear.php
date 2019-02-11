@@ -1,6 +1,6 @@
 <?php
     //session_start();
-    include('conexion.php');
+    include('parametros.php');
     $con = mysqli_connect($host, $user, $pass, $db_name) or die("<h1>Error al conectar con la base de datos</h1>");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {

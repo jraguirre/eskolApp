@@ -14,15 +14,15 @@
             $fila = mysqli_fetch_array($resultado);
             extract($fila);
             if(is_null ($clave)) {
-                echo("cambio_clave");
+                //echo("cambio_clave");
                 header('Location: cambio_clave.php');
             } elseif ($clave==$password) {
                 header('Location: menu.php');
             } else {
-                $mensaje = '<h2 style="color:blue;">Contraseña incorrecta. Inténtelo otra vez.</h2>';
+                //$mensaje = '<h2 style="color:blue;">Contraseña incorrecta. Inténtelo otra vez.</h2>';
                 echo($mensaje);
-                header("refresh:2;url=index.php");
-                // header('Location: index.php');
+                //header("refresh:2;url=index.php");
+                 header('Location: index.php');
             }
         }
         }
