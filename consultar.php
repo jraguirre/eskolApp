@@ -16,41 +16,60 @@
         $año = $hoy["year"];
         $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from usuarios where ";
+        $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios where ";
         $inserta_and = false;
+        $todos = true;
         if ($nombre != "") {
             $consulta .= "nombre like '%". $nombre . "%' ";
             $inserta_and = true;
+            $todos = false;
         }
         if ($apellido1 != "") {
             if ($inserta_and) {$consulta .= " and ";}
             $consulta .= "apellido1 like '%". $apellido1 . "%' ";
             $inserta_and = true;
+            $todos = false;
         }
         if ($apellido2 != "") {
             if ($inserta_and) {$consulta .= " and ";}
             $consulta .= "apellido2 like '%". $apellido2 . "%' ";
             $inserta_and = true;
+            $todos = false;
         }
         if ($dni != "") {
             if ($inserta_and) {$consulta .= " and ";}
             $consulta .= "dni like '%". $dni . "%' ";
             $inserta_and = true;
+            $todos = false;
         }
         if ($email != "") {
             if ($inserta_and) {$consulta .= " and ";}
             $consulta .= "email like '%". $email . "%' ";
             $inserta_and = true;
+            $todos = false;
         }
 
         $consulta .= " and baja is null";
         // echo $consulta;
+        if ($todos) {
+            $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios";
+        }
         $resultado = mysqli_query($con, $consulta);
+
+        $json_array = array();
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            $json_array[] = $fila;
+        }
+        echo json_encode($json_array);
+
+
+
+
         //echo $resultado;
-        $num_filas = mysqli_num_rows($resultado);
-        if ($num_filas != 0) {
-            $fila= mysqli_fetch_array($resultado);
-            extract($fila);
+        // $num_filas = mysqli_num_rows($resultado);
+        // if ($num_filas != 0) {
+        //     $fila= mysqli_fetch_array($resultado);
+        //     extract($fila);
             //$resultado = '{"nombre" : "'. $nombre .'"}';
         // $consulta = "insert into usuarios (nombre, apellido1, apellido2, dni, email, tipo, alta) values ('" .
         //             $nombre . "', '" . $apellido1 . "', '" . $apellido2 . "', '" . $dni . "', '" . 
@@ -58,11 +77,11 @@
         //             echo( $consulta);
         // $resultado = mysqli_query($con, $consulta);
         //echo json_encode(array($resultado));
-        echo json_encode(array("nombre"=>$nombre, "apellido1"=>$apellido1,"apellido2"=>$apellido2, "dni"=>$dni,
-                                "email"=>$email, "tipo"=>$tipo, "alta"=>$alta));
-        } else {
-            echo json_encode(array("resultado"=>"Usuario inexistente"));
-        }
+        // echo json_encode(array("nombre"=>$nombre, "apellido1"=>$apellido1,"apellido2"=>$apellido2, "dni"=>$dni,
+        //                         "email"=>$email, "tipo"=>$tipo, "alta"=>$alta));
+        // } else {
+        //     echo json_encode(array("resultado"=>"Usuario inexistente"));
+        // }
       }
 
 

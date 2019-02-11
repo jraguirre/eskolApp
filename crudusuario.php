@@ -35,11 +35,12 @@
     </select><br>
     Fecha Alta: <input type='text' name='alta' readonly><br>
     <button type='button' onclick='crear()'>Crear</button>
+    <button type='button' onclick='limpiar()'>Limpiar</button>
     <button type='button' onclick='consultar()'>Consultar</button>
     <button type='button' onclick='borrar()'>Borrar</button>
     <button type='button' onclick='actualizar()'>Actualizar</button>
-    <button type='button' onclick='anterior()'><</button>
-    <button type='button' onclick='siguiente()'>></button><br>
+    <button type='button' onclick='anterior()' id="ant" ><</button>
+    <button type='button' onclick='siguiente()'id="sig" >></button><br>
     </form> 
     </div>
     <script src="main.js"></script>  
