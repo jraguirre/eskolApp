@@ -5,7 +5,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //print_r($_POST);
-        //echo $_POST["nombre"];
+        echo $_POST["nombre"];
         $nombre = test_input($_POST["nombre"]);
         $apellido1 = test_input($_POST["apellido1"]);
         $apellido2 = test_input($_POST["apellido2"]);
@@ -25,10 +25,11 @@
         $consulta = "update usuarios set " .
                     "nombre = '" . $nombre . "', apellido1 ='" . $apellido1 . "', apellido2='" . $apellido2 . 
                     "', dni='" . $dni . "', email = '" . $email . "', tipo= " . $tipo . 
-                    ", ' ultima_modificacion =" . $fecha . "'" ;
-                    echo( $consulta);
+                    ",  ultima_modificacion = '" . $fecha . "' where dni ='$dni'";
+                    // echo( $consulta);
         $resultado = mysqli_query($con, $consulta);
-        echo json_encode(array("resultado"=>"Usuario insertado"));
+        echo ($resultado);
+        echo json_encode(array("resultado"=>"Usuario actualizado"));
         //} else {
         //    echo json_encode(array("resultado"=>"Usuario existente"));
             //$_POST["status"] = "Usuario existente";

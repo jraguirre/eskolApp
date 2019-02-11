@@ -1,4 +1,6 @@
     <?php
+    session_start();
+    $dni = $_SESSION["dni"];
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -8,9 +10,10 @@
     include('parametros.php');
     $con = mysqli_connect($host, $user, $pass, $db_name) or die("<h1>Error al conectar con la base de datos</h1>");
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $email = test_input($_POST["email"]);
+        echo("<" . $dni . ">");
+        $email = test_input($_POST["email"]); 
         // Crear token
-        $selector = bin2hex(random_bytes(8));
+        $selector = bin2hex(random_bytes(8)); 
         $token = random_bytes(32);
         
         $url = sprintf('%sreset_password.php?%s', $raiz, http_build_query([
@@ -31,9 +34,10 @@
             // echo($selector."\n");
             // echo($token."\n");
             //echo($fin);
-            $consulta = "insert into password_reset (email, selector, token, expira) values ('" .
-            $email . "', '" .  $selector . "', '" .  hash('sha256', $token) . "', " .  $fin . ")";
-            //echo($consulta);
+            echo ($dni);
+            $consulta = "insert into password_reset (usuario, email, selector, token, expira) values ('" .
+            $dni . "', '" . $email . "', '" .  $selector . "', '" .  hash('sha256', $token) . "', " .  $fin . ")";
+            echo($consulta);
             // if($resultado){
                 //     echo($consulta);
                 // } else {
@@ -56,7 +60,7 @@
                     
                     mail ($email, $asunto, $mensaje, $cabeceras);
                     //echo ('header("refresh:2;url=index.php")');
-                     header('Location: index.php');
+                    header('Location: index.php');
                     //echo ('header("refresh:2;url=index.php")');
                 }
  

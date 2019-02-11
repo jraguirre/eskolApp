@@ -1,4 +1,5 @@
 <?php
+// session_start();
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -27,10 +28,10 @@ if(false !== ctype_xdigit($selector) && false !== ctype_xdigit($validator)) :
        <div id=formulario>    
        <h2>Restablecer contraseña</h2>
        <form method='post' action='resetear_password.php'>
-       <input type="hidden" name="selector" value=<?php echo $selector; ?>">
-       <input type="hidden" name="validator" value=<?php echo $validator; ?>">
-       <label for="password1"><b>Contraseña</b>
-       <input type='password' name='password1'placeholder="Introduzca su contraseña" required><br>
+       <input type="hidden" name="selector" value=<?php echo $selector; ?>>
+       <input type="hidden" name="validator" value=<?php echo $validator; ?>>
+       <label for="password"><b>Contraseña</b>
+       <input type='password' name='password'placeholder="Introduzca su contraseña" required><br>
        <!-- <label for="password2"><b>Confirmación</b>
        <input type='password' name='password2'placeholder="Repita su contraseña" required><br> -->
        <button type='submit'>Enviar</button><br>

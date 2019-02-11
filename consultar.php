@@ -11,17 +11,40 @@
         $email = test_input($_POST["email"]);
         $tipo = test_input($_POST["tipo"]);
         $hoy = getdate();
-        $dia = $hoy["mday"];
+        $dia = $hoy["mday"]; 
         $mes = $hoy["mon"];
         $año = $hoy["year"];
         $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
         $consulta = "select * from usuarios where ";
+        $inserta_and = false;
         if ($nombre != "") {
-            $consulta .= "nombre like '*". $nombre . "*' and ";
+            $consulta .= "nombre like '%". $nombre . "%' ";
+            $inserta_and = true;
         }
-        $consulta .= " dni = '" . $dni ."' and baja is null";
-        //echo $consulta;
+        if ($apellido1 != "") {
+            if ($inserta_and) {$consulta .= " and ";}
+            $consulta .= "apellido1 like '%". $apellido1 . "%' ";
+            $inserta_and = true;
+        }
+        if ($apellido2 != "") {
+            if ($inserta_and) {$consulta .= " and ";}
+            $consulta .= "apellido2 like '%". $apellido2 . "%' ";
+            $inserta_and = true;
+        }
+        if ($dni != "") {
+            if ($inserta_and) {$consulta .= " and ";}
+            $consulta .= "dni like '%". $dni . "%' ";
+            $inserta_and = true;
+        }
+        if ($email != "") {
+            if ($inserta_and) {$consulta .= " and ";}
+            $consulta .= "email like '%". $email . "%' ";
+            $inserta_and = true;
+        }
+
+        $consulta .= " and baja is null";
+        // echo $consulta;
         $resultado = mysqli_query($con, $consulta);
         //echo $resultado;
         $num_filas = mysqli_num_rows($resultado);
@@ -35,7 +58,7 @@
         //             echo( $consulta);
         // $resultado = mysqli_query($con, $consulta);
         //echo json_encode(array($resultado));
-        echo json_encode(array("nombre"=>$nombre, "apellido1"=>$apellido1,"apellido2"=>$apellido2,
+        echo json_encode(array("nombre"=>$nombre, "apellido1"=>$apellido1,"apellido2"=>$apellido2, "dni"=>$dni,
                                 "email"=>$email, "tipo"=>$tipo, "alta"=>$alta));
         } else {
             echo json_encode(array("resultado"=>"Usuario inexistente"));
