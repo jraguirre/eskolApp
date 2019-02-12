@@ -12,13 +12,23 @@
         $resultado = mysqli_query($con, $consulta);
         $num_filas = mysqli_num_rows($resultado);
         // echo($num_filas);
+        $fecha = getdate();
+        $dia = $fecha["mday"];
+        $mes = $fecha["mon"];
+        $año = $fecha["year"];
+        $hora = $fecha["hours"];
+        $minutos = $fecha["minutes"];
+        $segundos = $fecha["seconds"];
+        $hoy = "$año-$mes-$dia $hora:$minutos:$segundos";
         if($num_filas==1){
             $fila = mysqli_fetch_array($resultado);
             extract($fila);
             if(is_null ($clave)) {
                 // echo("cambio_clave");
                 header('Location: cambio_clave.php');
-            } elseif ($clave==$password) {
+            } elseif ($clave==hash('sha256',$password)) {
+                $consulta = "update usuarios set ultimo_acceso ='$hoy' where dni = '$dni'";
+                $resultado= mysqli_query($con, $consulta);
                 header('Location: menu.php');
             } else {
                 //$mensaje = '<h2 style="color:blue;">Contraseña incorrecta. Inténtelo otra vez.</h2>';

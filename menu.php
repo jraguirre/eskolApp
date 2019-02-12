@@ -40,12 +40,13 @@
        break;
        case 3:
        echo("Opción 1"); 
-       break;
+       break; 
        case 4:
        echo("Opción 1"); 
-       break;
+       break; 
        case 5: 
-            echo("Opción 1"); ?>
+            // echo("Opción 1");
+             ?>
        <button type='button' onclick='crudUsuario()'>Mantenimiento de usuarios</button>
     <?php
         break;

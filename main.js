@@ -80,9 +80,8 @@ function consultar() {
 function borrar() {
     cargaFormulario();
     $.post("borrar.php", data, function (datos, status){
-        alert("Usuario borrado.");
+        alert(datos);
     });
-    
 }
 
 function actualizar() {

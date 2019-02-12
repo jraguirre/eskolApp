@@ -63,7 +63,7 @@
     <label for="password"><b>Contraseña</b> 
     <input type='password' placeholder="Introduzca su contraseña" name='password'><br>
     <button type='submit'>Entrar</button><br>
-    <a href='cambio_clave.php'>He olvidado mi contraseña</a>
+    <!-- <a href='cambio_clave.php'>He olvidado mi contraseña</a> -->
     </form>
 </div>
     </body>

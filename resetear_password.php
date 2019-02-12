@@ -34,7 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $calc = hash('sha256', hex2bin($validator));
         // echo($calc . "\n" . $token);
         if (hash_equals($calc, $token)) {
-            $consulta = "update usuarios set clave = '$password' where dni = '$usuario'";
+            $hashPassword = hash('sha256', $password);
+            $consulta = "update usuarios set clave = '$hashPassword' where dni = '$usuario'";
             echo($consulta);
             
             $resultado = mysqli_query($con, $consulta);

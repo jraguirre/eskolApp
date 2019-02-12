@@ -15,7 +15,7 @@
     Nombre: <input type='text' name='nombre'/><br>
     Apellido 1: <input type='text' name='apellido1'/><br>
     Apellido 2: <input type='text' name='apellido2'/><br>
-    DNI: <input type='text' name='apellido2'/><br>
+    DNI: <input type='text' name='dni'/><br>
     Correo electrónico: <input type='text' name='email'/><br>
  
 
@@ -38,7 +38,7 @@
     <button type='button' onclick='limpiar()'>Limpiar</button>
     <button type='button' onclick='consultar()'>Consultar</button>
     <button type='button' onclick='borrar()'>Borrar</button>
-    <button type='button' onclick='actualizar()'>Actualizar</button>
+    <button type='button' onclick='actualizar()'>Modificar</button>
     <button type='button' onclick='anterior()' id="ant" ><</button>
     <button type='button' onclick='siguiente()'id="sig" >></button><br>
     </form> 

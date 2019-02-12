@@ -52,7 +52,7 @@
         $consulta .= " and baja is null";
         // echo $consulta;
         if ($todos) {
-            $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios";
+            $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios where baja is null";
         }
         $resultado = mysqli_query($con, $consulta);
 
