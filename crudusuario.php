@@ -35,7 +35,7 @@
     </select><br>
     Fecha Alta: <input type='text' name='alta' readonly><br>
     <button type='button' onclick='crear()'>Crear</button>
-    <button type='button' onclick='limpiar()'>Limpiar</button>
+    <button type='button' onclick='limpiar(6)'>Limpiar</button>
     <button type='button' onclick='consultar()'>Consultar</button>
     <button type='button' onclick='borrar()'>Borrar</button>
     <button type='button' onclick='actualizar()'>Modificar</button>

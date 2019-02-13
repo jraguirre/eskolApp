@@ -26,28 +26,42 @@
         // echo $nombre;
    }
    ?> 
-   <h2>Hola <?php echo($nombre);?></h2>
    <div id=formulario>
+   <h2>Hola <?php echo($nombre);?></h2>
+   <h3>Menú de <?php 
+   $consulta ="select nombre from tipos_usuario where tipo=$tipo";
+   $resultado= mysqli_query($con, $consulta);
+   $fila=mysqli_fetch_array($resultado);
+   extract($fila);
+   echo $nombre;
+   ?></h3>
    <?php
    switch ($tipo) {
-       case 1: 
-            echo("Opción 1"); ?> 
-            <button type='button' onclick='consCalif()'>Consultar calificaciones</button>
-            <button type='button' onclick='consultar()'>Consultar</button>     
+       case 1:?> 
+            <button type='button' onclick='consCalif()'>Consultar calificaciones</button>    
     <?php break;
-       case 2:
-       echo("Opción 1"); 
+       case 2:?>
+            <button type='button' onclick='consCalif()'>Consultar Coordinador calificaciones</button>
+        <?php break;
        break;
-       case 3:
-       echo("Opción 1"); 
-       break; 
-       case 4:
-       echo("Opción 1"); 
-       break; 
+       case 3:?>
+            <button type='button' onclick='consCalif()'>Consultar Profesor calificaciones</button>
+        <?php break;
+       break;
+       case 4:?>
+            <button type='button' onclick='consCalif()'>Consultar Tutor calificaciones</button>
+        <?php break;
+       break;
        case 5: 
             // echo("Opción 1");
              ?>
-       <button type='button' onclick='crudUsuario()'>Mantenimiento de usuarios</button>
+       <button type='button' onclick='crud("Usuario")'>Mantenimiento de usuarios</button>
+       <button type='button' onclick='crud("Tutelas")'>Mantenimiento de tutores</button>
+       <button type='button' onclick='crud("Asignaturas")'>Mantenimiento de asignaturas</button>
+       <button type='button' onclick='crud("Materias")'>Mantenimiento de materias</button>
+       <button type='button' onclick='crud("Talleres")'>Mantenimiento de talleres</button>
+       <button type='button' onclick='crud("Cursos")'>Mantenimiento de cursos</button>
+       <button type='button' onclick='crud("Evaluaciones")'>Mantenimiento de evaluaciones</button>
     <?php
         break;
    }

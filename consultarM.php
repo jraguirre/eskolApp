@@ -5,66 +5,55 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = test_input($_POST["nombre"]);
-        $apellido1 = test_input($_POST["apellido1"]);
-        $apellido2 = test_input($_POST["apellido2"]);
-        $dni = test_input($_POST["dni"]);
-        $email = test_input($_POST["email"]);
-        $tipo = test_input($_POST["tipo"]);
         $hoy = getdate();
         $dia = $hoy["mday"]; 
         $mes = $hoy["mon"];
         $año = $hoy["year"];
         $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios where ";
-        $inserta_and = false;
-        $todos = true;
-        if ($nombre != "") {
-            $consulta .= "nombre like '%". $nombre . "%' ";
-            $inserta_and = true;
-            $todos = false;
-        }
-        if ($apellido1 != "") {
-            if ($inserta_and) {$consulta .= " and ";}
-            $consulta .= "apellido1 like '%". $apellido1 . "%' ";
-            $inserta_and = true;
-            $todos = false;
-        }
-        if ($apellido2 != "") {
-            if ($inserta_and) {$consulta .= " and ";}
-            $consulta .= "apellido2 like '%". $apellido2 . "%' ";
-            $inserta_and = true;
-            $todos = false;
-        }
-        if ($dni != "") {
-            if ($inserta_and) {$consulta .= " and ";}
-            $consulta .= "dni like '%". $dni . "%' ";
-            $inserta_and = true;
-            $todos = false;
-        }
-        if ($email != "") {
-            if ($inserta_and) {$consulta .= " and ";}
-            $consulta .= "email like '%". $email . "%' ";
-            $inserta_and = true;
-            $todos = false;
-        }
-        if ($tipo != "") {
-            if ($inserta_and) {$consulta .= " and ";}
-            $consulta .= "tipo like '%". $tipo . "%' ";
-            $inserta_and = true;
-            $todos = false;
-        }
-        $consulta .= " and baja is null";
-         //echo $consulta;
-        if ($todos) {
-            $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios where baja is null";
-        }
+        $consulta = "select * from materias";
+        // $inserta_and = false;
+        // $todos = true;
+        // if ($nombre != "") {
+        //     $consulta .= "nombre like '%". $nombre . "%' ";
+        //     $inserta_and = true;
+        //     $todos = false;
+        // }
+        // if ($apellido1 != "") {
+        //     if ($inserta_and) {$consulta .= " and ";}
+        //     $consulta .= "apellido1 like '%". $apellido1 . "%' ";
+        //     $inserta_and = true;
+        //     $todos = false;
+        // }
+        // if ($apellido2 != "") {
+        //     if ($inserta_and) {$consulta .= " and ";}
+        //     $consulta .= "apellido2 like '%". $apellido2 . "%' ";
+        //     $inserta_and = true;
+        //     $todos = false;
+        // }
+        // if ($dni != "") {
+        //     if ($inserta_and) {$consulta .= " and ";}
+        //     $consulta .= "dni like '%". $dni . "%' ";
+        //     $inserta_and = true;
+        //     $todos = false;
+        // }
+        // if ($email != "") {
+        //     if ($inserta_and) {$consulta .= " and ";}
+        //     $consulta .= "email like '%". $email . "%' ";
+        //     $inserta_and = true;
+        //     $todos = false;
+        // }
+
+        // $consulta .= " and baja is null";
+        // // echo $consulta;
+        // if ($todos) {
+        //     $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios where baja is null";
+        // }
         $resultado = mysqli_query($con, $consulta);
 
         $json_array = array();
         while ($fila = mysqli_fetch_assoc($resultado)) {
             $json_array[] = $fila;
-
         }
         echo json_encode($json_array);
 
