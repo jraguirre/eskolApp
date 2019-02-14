@@ -55,13 +55,13 @@
        case 5: 
             // echo("Opción 1");
              ?>
-       <button type='button' onclick='crud("Usuario")'>Mantenimiento de usuarios</button>
-       <button type='button' onclick='crud("Tutelas")'>Mantenimiento de tutores</button>
-       <button type='button' onclick='crud("Asignaturas")'>Mantenimiento de asignaturas</button>
-       <button type='button' onclick='crud("Materias")'>Mantenimiento de materias</button>
-       <button type='button' onclick='crud("Talleres")'>Mantenimiento de talleres</button>
-       <button type='button' onclick='crud("Cursos")'>Mantenimiento de cursos</button>
-       <button type='button' onclick='crud("Evaluaciones")'>Mantenimiento de evaluaciones</button>
+       <button type='button' onclick='crud("Usuario")'>Usuari@s</button>
+       <button type='button' onclick='crud("Tutelas")'>Tutor@s</button>
+       <button type='button' onclick='crud("Materias")'>Materias</button>
+       <button type='button' onclick='crud("Asignaturas")'>Asignaturas</button>
+       <button type='button' onclick='crud("Talleres")'>Especialidades</button>
+       <button type='button' onclick='crud("Cursos")'>Cursos</button>
+       <button type='button' onclick='crud("Evaluaciones")'>Evaluaciones</button>
     <?php
         break;
    }

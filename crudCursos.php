@@ -12,7 +12,7 @@
     <div id=formulario>
     <h2>Mantenimiento de Cursos</h2>
     <form id="form" method='post' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
-    Materia: <input type='text' name='nombre' require/><br>
+    Curso: <input type='text' name='nombre' require/><br>
     <button type='button' onclick='crearC()'>Crear</button>
     <button type='button' onclick='consultarC()'>Consultar</button>
     <button type='button' onclick='borrarC()'>Borrar</button>

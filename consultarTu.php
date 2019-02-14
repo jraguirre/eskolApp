@@ -4,14 +4,14 @@
     $con = mysqli_connect($host, $user, $pass, $db_name) or die("<h1>Error al conectar con la base de datos</h1>");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = test_input($_POST["nombre"]);
+        $tutor = test_input($_POST["tutor"]);
         $hoy = getdate();
         $dia = $hoy["mday"]; 
         $mes = $hoy["mon"];
         $año = $hoy["year"];
         $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from talleres";
+        $consulta = "select nombre, apellido1, apellido2 from usuarios where dni in (select tutelado from tutelas where tutor='$tutor')";
         // $inserta_and = false;
         // $todos = true;
         // if ($nombre != "") {
@@ -44,7 +44,7 @@
         //     $todos = false;
         // }
 
-        // $consulta .= " and baja is null"; 
+        // $consulta .= " and baja is null";
         // // echo $consulta;
         // if ($todos) {
         //     $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios where baja is null";
@@ -55,7 +55,7 @@
         while ($fila = mysqli_fetch_assoc($resultado)) {
             $json_array[] = $fila;
         }
-        echo json_encode($json_array);
+        echo json_encode($json_array); 
 
 
 

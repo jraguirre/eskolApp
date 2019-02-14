@@ -20,7 +20,7 @@
         $resultado = mysqli_query($con, $consulta);
         while ($fila = mysqli_fetch_array($resultado)){
             extract($fila);
-            echo "<option value=$id>$nombre $apellido1 $apellido2</option>";
+            echo "<option value=$dni>$nombre $apellido1 $apellido2</option>";
         }
     ?>    
     </select><br>
@@ -30,15 +30,17 @@
         $resultado = mysqli_query($con, $consulta);
         while ($fila = mysqli_fetch_array($resultado)){
             extract($fila);
-            echo "<option value=$id>$nombre $apellido1 $apellido2</option>";
+            echo "<option value=$dni>$nombre $apellido1 $apellido2</option>";
         }
     ?>    
     </select><br>
     <button type='button' onclick='asociar()'>Asociar</button>
-    <button type='button' onclick='consultarT()'>Consultar</button>
-    <button type='button' onclick='borrarT()'>Separar</button>
-    <button type='button' onclick='anteriorT()' id="ant" ><</button>
-    <button type='button' onclick='siguienteT()'id="sig" >></button><br>
+    <button type='button' onclick='consultarTu()'>Consultar</button>
+    <button type='button' onclick='borrarTu()'>Separar</button><br>
+    <!-- <button type='button' onclick='anteriorT()' id="ant" ><</button>
+    <button type='button' onclick='siguienteT()'id="sig" >></button><br> -->
+    <h3>Alumn@s tutelad@s</h3>
+    <div id=resultado></div>
     </form> 
     </div>
     <script src="main.js"></script>  

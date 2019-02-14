@@ -10,7 +10,7 @@
     include('parametros.php');
     $con = mysqli_connect($host, $user, $pass, $db_name) or die("<h1>Error al conectar con la base de datos</h1>");
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        echo("<" . $dni . ">");
+        //echo("<" . $dni . ">");
         $email = test_input($_POST["email"]); 
         // Crear token
         $selector = bin2hex(random_bytes(8)); 
@@ -34,10 +34,10 @@
             // echo($selector."\n");
             // echo($token."\n");
             //echo($fin);
-            echo ($dni);
-            $consulta = "insert into password_reset (usuario, email, selector, token, expira) values ('" .
+            //echo ($dni);
+            $consulta = "insert into password_reset (dni, email, selector, token, expira) values ('" .
             $dni . "', '" . $email . "', '" .  $selector . "', '" .  hash('sha256', $token) . "', " .  $fin . ")";
-            echo($consulta);
+            //echo($consulta);
             // if($resultado){
                 //     echo($consulta);
                 // } else {

@@ -24,7 +24,7 @@
         if ($num_filas == 0) {
         $consulta = "insert into asignaturas (nombre, materia, profesor, taller, curso, evaluacion) values ('" .
                     "$nombre', $materia, '$profesor', $taller, $curso, $evaluacion)" ;
-                    //echo( $consulta);
+                    echo( $consulta);
         $resultado = mysqli_query($con, $consulta);
         // if ($resultado){
         echo json_encode(array("resultado"=>"Asignatura insertada"));

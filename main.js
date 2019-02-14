@@ -10,7 +10,6 @@ function limpiar(n) {
 function cargaTutela() {
     tutor=$( "select#tutor option:checked" ).val();
     alumno=$( "select#alumno option:checked" ).val();
-    alert (tutor);
     data={ "tutor" : tutor,
            "alumno" : alumno, 
          };    
@@ -58,6 +57,16 @@ function cargaFormularioM() {
 function cargaFormularioT() {
     nombre=document.getElementById("form").elements[0].value;
     data={ "nombre" : nombre,
+         };    
+}
+
+
+function cargaFormularioTu() {
+    tutor=$( "select#tutor option:checked" ).val();
+    alumno=$( "select#alumno option:checked" ).val();
+    //alert (tutor);
+    data={ "tutor" : tutor,
+           "alumno" : alumno,
          };    
 }
 
@@ -147,6 +156,25 @@ function mostrarDatosT() {
       }
     
     document.getElementById("form").elements[0].value=result[ind]["nombre"];
+}
+
+function mostrarDatosTu() {
+    // if (ind == 0) {
+    //     document.getElementById("ant").disabled = true;  
+    //   } else {
+    //       document.getElementById("ant").disabled = false;  
+    //   }
+    //   if (ind == result.length-1) {
+    //       //ind--
+    //     document.getElementById("sig").disabled = true;  
+    //   } else {
+    //       document.getElementById("sig").disabled = false;  
+    //   }
+    tabla="";
+    for (i=0; i<result.length; i++){
+    tabla+=result[i]['nombre'] + ' ' +  result[i]['apellido1'] + ' ' + result[i]['apellido2'] + "<br>";
+    }
+    document.getElementById("resultado").innerHTML=tabla; 
 }
 
 function mostrarDatosC() {
@@ -265,7 +293,7 @@ function consultarM() {
        mostrarDatosM();     
    });    
 } 
-
+ 
 function consultarT() {
     cargaFormularioT();
    $.post("consultarT.php", data, function(datos, status){
@@ -274,6 +302,16 @@ function consultarT() {
        mostrarDatosT();     
    });    
 } 
+
+function consultarTu() {
+    cargaFormularioTu();
+   $.post("consultarTu.php", data, function(datos, status){
+       ind=0;
+       result=JSON.parse(datos);
+       mostrarDatosTu();     
+   });    
+} 
+
 
 function consultarC() {
     cargaFormularioC();
@@ -317,6 +355,13 @@ function borrarM() {
 function borrarT() {
     cargaFormularioT();
     $.post("borrarT.php", data, function (datos, status){
+        alert(datos);
+    });
+}
+
+function borrarTu() {
+    cargaFormularioTu();
+    $.post("borrarTu.php", data, function (datos, status){
         alert(datos);
     });
 }
