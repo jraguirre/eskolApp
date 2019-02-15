@@ -268,7 +268,7 @@ function mostrarFormularioNotas() {
 
 function grabarNota (alumno, grupo, evaluacion) {
     nota = document.getElementById(alumno).value; 
-    alert ("El alumno " + alumno + " tiene un " + nota + " en la " + evaluacion + " de " + grupo);
+    // alert ("El alumno " + alumno + " tiene un " + nota + " en la " + evaluacion + " de " + grupo);
     data={ 
         "alumno" : alumno,
         "grupo" : grupo,
@@ -708,7 +708,7 @@ function anteriorG() {
 
 function siguienteG() {
     if (ind < result.length-1){
-        ind++;
+        ind++; 
     }
     mostrarDatosG();    
 }
@@ -723,5 +723,12 @@ function crudUsuario() {
 
 function crudAsignaturas() {
     window.open("crudAsignaturas.php", "_self");
+}
+
+function consCalif() {
+    window.open("consCalif.php", "_self");
+}
+
+function consultarCalificaciones() {
 }
 

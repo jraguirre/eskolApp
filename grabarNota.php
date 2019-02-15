@@ -16,18 +16,18 @@
         // $año = $hoy["year"];
         // $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from calificaciones where alumno='$alumno' and asignatura=$grupo and evaluacion=$evaluacion";
+        $consulta = "select * from calificaciones where alumno='$alumno' and grupo=$grupo and evaluacion=$evaluacion";
         $resultado = mysqli_query($con, $consulta);
         $num_filas = mysqli_num_rows($resultado);
         if ($num_filas == 0) {
         $consulta = "insert into calificaciones (alumno, grupo, evaluacion, nota) values ('$alumno', $grupo, $evaluacion, $nota)";
-                    echo( $consulta);
+                    // echo( $consulta);
         $resultado = mysqli_query($con, $consulta); 
         // if ($resultado){
         echo json_encode(array("resultado"=>"Nota insertada"));
         } else {
-            $consulta = "update calificaciones set nota=$nota where alumno='$alumno' and asignatura=$grupo and evaluacion=$evaluacion";
-            echo( $consulta);
+            $consulta = "update calificaciones set nota=$nota where alumno='$alumno' and grupo=$grupo and evaluacion=$evaluacion";
+            // echo( $consulta);
             $resultado = mysqli_query($con, $consulta);
             echo json_encode(array("resultado"=>"Nota actualizada"));
             //$_POST["status"] = "Usuario existente"; 

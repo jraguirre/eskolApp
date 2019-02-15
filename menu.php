@@ -46,18 +46,19 @@
         <?php break;
        break;
        case 3:?>
-            <button type='button' onclick='consCalif()'>Consultar Profesor calificaciones</button>
+            <button type='button' onclick='crud("Calif")'>Calificaciones</button>
+            <button type='button' onclick='consCalif()'>Consultar calificaciones</button>
         <?php break;
        break;
        case 4:?>
-            <button type='button' onclick='consCalif()'>Consultar Tutor calificaciones</button>
+            <button type='button' onclick='consCalif()'>Consultar calificaciones</button>
         <?php break;
        break;
        case 5: 
        // echo("Opción 1");
        ?>
-       <button type='button' onclick='crud("Usuario")'>Usuari@s</button>
-       <button type='button' onclick='crud("Tutelas")'>Tutor@s</button>
+       <button type='button' onclick='crud("Usuario")'>Usuarixs</button>
+       <button type='button' onclick='crud("Tutelas")'>Tutorxs</button>
        <button type='button' onclick='crud("Materias")'>Materias</button>
        <button type='button' onclick='crud("Asignaturas")'>Asignaturas</button>
        <button type='button' onclick='crud("Talleres")'>Especialidades</button>
