@@ -6,36 +6,36 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //print_r($_POST);
         //echo $_POST["nombre"];
-        // $nombre = test_input($_POST["nombre"]);
-        $materia = test_input($_POST["materia"]);
-        // $taller = test_input($_POST["taller"]);
-        $profesor = test_input($_POST["profesor"]);
+        $alumno = test_input($_POST["alumno"]);
         $grupo = test_input($_POST["grupo"]);
-        // $evaluacion = test_input($_POST["evaluacion"]);
+        $evaluacion = test_input($_POST["evaluacion"]);
+        $nota = test_input($_POST["nota"]);
         // $hoy = getdate();
         // $dia = $hoy["mday"];
         // $mes = $hoy["mon"];
         // $año = $hoy["year"];
         // $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from asignaturas where materia=$materia and grupo=$grupo and profesor ='$profesor'";
+        $consulta = "select * from calificaciones where alumno='$alumno' and asignatura=$grupo and evaluacion=$evaluacion";
         $resultado = mysqli_query($con, $consulta);
         $num_filas = mysqli_num_rows($resultado);
         if ($num_filas == 0) {
-        $consulta = "insert into asignaturas (materia, profesor, grupo) values (" .
-                    "$materia, '$profesor', $grupo)" ;
-                    // echo( $consulta);
-        $resultado = mysqli_query($con, $consulta);
+        $consulta = "insert into calificaciones (alumno, grupo, evaluacion, nota) values ('$alumno', $grupo, $evaluacion, $nota)";
+                    echo( $consulta);
+        $resultado = mysqli_query($con, $consulta); 
         // if ($resultado){
-        echo json_encode(array("resultado"=>"Asignatura insertada"));
+        echo json_encode(array("resultado"=>"Nota insertada"));
         } else {
-            echo json_encode(array("resultado"=>"Asignatura existente"));
+            $consulta = "update calificaciones set nota=$nota where alumno='$alumno' and asignatura=$grupo and evaluacion=$evaluacion";
+            echo( $consulta);
+            $resultado = mysqli_query($con, $consulta);
+            echo json_encode(array("resultado"=>"Nota actualizada"));
             //$_POST["status"] = "Usuario existente"; 
             //print_r($_POST);
         }
       }
     
- 
+
 
     function test_input($data) {
         $data = trim($data);

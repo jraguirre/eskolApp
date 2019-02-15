@@ -4,10 +4,8 @@
     $con = mysqli_connect($host, $user, $pass, $db_name) or die("<h1>Error al conectar con la base de datos</h1>");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $taller = test_input($_POST["taller"]);
-        $materia = test_input($_POST["materia"]);
-        $profesor = test_input($_POST["profesor"]);
-        $grupo = test_input($_POST["grupo"]);
+        $asignatura = test_input($_POST["asignatura"]);
+        $evaluacion = test_input($_POST["evaluacion"]);
         // // $evaluacion = test_input($_POST["evaluacion"]);
         $hoy = getdate();
         $dia = $hoy["mday"]; 
@@ -15,8 +13,8 @@
         $año = $hoy["year"];
         $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from asignaturas";
-        // echo ($consulta);
+        $consulta = "select nombre, apellido1, apellido2, '$asignatura' as asignatura, '$evaluacion' as evaluacion, dni from usuarios where dni in (select alumno from alumnos_grupo where grupo =$asignatura)";
+        //echo ($consulta);
         // $inserta_and = false;
         // $todos = true;
         // if ($nombre != "") {
@@ -56,6 +54,7 @@
         // }
         $resultado = mysqli_query($con, $consulta);
 
+        
         $json_array = array();
         while ($fila = mysqli_fetch_assoc($resultado)) {
             $json_array[] = $fila;

@@ -15,6 +15,22 @@ function cargaTutela() {
          };    
 }
 
+function cargaCalificaciones() {
+    asignatura=$( "select#asignatura option:checked" ).val();
+    evaluacion=$( "select#evaluacion option:checked" ).val();
+    data={ "asignatura" : asignatura,
+           "evaluacion" : evaluacion, 
+         };    
+}
+
+function cargaAlumnos() {
+    grupo=$( "select#grupo option:checked" ).val();
+    alumno=$( "select#alumno option:checked" ).val();
+    data={ "grupo" : grupo,
+           "alumno" : alumno, 
+         };    
+}
+
 
 function cargaFormulario() {
     nombre=document.getElementById("form").elements[0].value;
@@ -33,24 +49,40 @@ function cargaFormulario() {
 }
 
 function cargaFormularioA() {
-    nombre=document.getElementById("form").elements[0].value;
+    // nombre=document.getElementById("form").elements[0].value;
     materia=$( "select#materia option:checked" ).val();
     profesor=$( "select#profesor option:checked" ).val();
-    taller=$( "select#taller option:checked" ).val();
-    curso=$( "select#curso option:checked" ).val();
-    evaluacion=$( "select#evaluacion option:checked" ).val();
-    data={ "nombre" : nombre,
+    // taller=$( "select#taller option:checked" ).val();
+    grupo=$( "select#grupo option:checked" ).val();
+    // evaluacion=$( "select#evaluacion option:checked" ).val();
+    data={ 
            "materia" : materia, 
-           "taller" : taller, 
            "profesor" : profesor,  
-           "curso" : curso,
-           "evaluacion" : evaluacion,
+           "grupo" : grupo,
          };    
 }
+
+function cargaFormularioAG() {
+    grupo=$( "select#grupo option:checked" ).val();
+    alumno=$( "select#alumno option:checked" ).val();
+    data={ 
+           "grupo" : grupo,
+           "alumno" : alumno,
+         };    
+}
+
 
 function cargaFormularioM() {
     nombre=document.getElementById("form").elements[0].value;
     data={ "nombre" : nombre,
+         };    
+}
+
+function cargaFormularioG() {
+    curso=$( "select#curso option:checked" ).val();
+    taller=$( "select#taller option:checked" ).val();
+    data={ "taller" : taller,
+           "curso" : curso, 
          };    
 }
 
@@ -71,8 +103,10 @@ function cargaFormularioTu() {
 }
 
 function cargaFormularioC() {
-    nombre=document.getElementById("form").elements[0].value;
-    data={ "nombre" : nombre,
+    taller=$( "select#taller option:checked" ).val();
+    curso=$( "select#curso option:checked" ).val();
+    data={ "taller" : taller,
+           "curso" : curso,
          };    
 }
 
@@ -118,12 +152,9 @@ function mostrarDatosA() {
           document.getElementById("sig").disabled = false;  
       }
     
-    document.getElementById("form").elements[0].value=result[ind]["nombre"];
-    document.getElementById("form").elements[1].value=result[ind]["materia"];
+    document.getElementById("form").elements[0].value=result[ind]["materia"];
+    document.getElementById("form").elements[1].value=result[ind]["grupo"];
     document.getElementById("form").elements[2].value=result[ind]["profesor"];
-    document.getElementById("form").elements[3].value=result[ind]["taller"];
-    document.getElementById("form").elements[4].value=result[ind]["curso"];
-    document.getElementById("form").elements[5].value=result[ind]["evaluacion"];
 }
 
 function mostrarDatosM() {
@@ -177,6 +208,98 @@ function mostrarDatosTu() {
     document.getElementById("resultado").innerHTML=tabla; 
 }
 
+function mostrarDatosAG() {
+    // if (ind == 0) {
+    //     document.getElementById("ant").disabled = true;  
+    //   } else {
+    //       document.getElementById("ant").disabled = false;  
+    //   }
+    //   if (ind == result.length-1) {
+    //       //ind--
+    //     document.getElementById("sig").disabled = true;  
+    //   } else {
+    //       document.getElementById("sig").disabled = false;  
+    //   }
+    tabla="";
+    if(result.length == 0) {
+        document.getElementById("resultado").innerHTML="No hay alumnxs en este grupo."
+    } else {
+    for (i=0; i<result.length; i++){
+    tabla+=result[i]['nombre'] + ' ' +  result[i]['apellido1'] + ' ' + result[i]['apellido2'] + "<br>";
+    }
+    document.getElementById("resultado").innerHTML=tabla; 
+}
+}
+ 
+
+function mostrarFormularioNotas() {
+    // if (ind == 0) {
+    //     document.getElementById("ant").disabled = true;  
+    //   } else {
+    //       document.getElementById("ant").disabled = false;  
+    //   }
+    //   if (ind == result.length-1) {
+    //       //ind--
+    //     document.getElementById("sig").disabled = true;  
+    //   } else {
+    //       document.getElementById("sig").disabled = false;  
+    //   }
+    tabla="<table style='width:100%'>";
+ 
+    if(result.length == 0) {
+        document.getElementById("resultado").innerHTML="No hay alumnxs en este grupo."
+    } else {
+    for (i=0; i<result.length; i++){
+        nombre = result[i]['nombre'];
+        apellido1 = result[i]['apellido1'];
+        apellido2 = result[i]['apellido2'];
+        dni = result[i]['dni'];
+        asignatura = result[i]['asignatura'];
+        evaluacion = result[i]['evaluacion'];
+    tabla+='<tr><td>' + nombre + ' ' +  apellido1 + ' ' + apellido2 +
+     '</td><td><input type="number" id="' + dni + 
+     '"></td><td><button type="button" onclick="grabarNota(\''+ dni + '\', ' + asignatura +
+      ', ' + evaluacion + ')">Grabar</button></td></tr>';
+    }
+    tabla += "</table>";
+    document.getElementById("resultado").innerHTML=tabla; 
+}
+}
+
+function grabarNota (alumno, grupo, evaluacion) {
+    nota = document.getElementById(alumno).value; 
+    alert ("El alumno " + alumno + " tiene un " + nota + " en la " + evaluacion + " de " + grupo);
+    data={ 
+        "alumno" : alumno,
+        "grupo" : grupo,
+        "evaluacion" : evaluacion,
+        "nota" : nota,
+      };
+      $.post("grabarNota.php", data, function(datos, status){
+        resultado=JSON.parse(datos);
+        alert("Resultado: "+ resultado["resultado"]);        
+   });  
+}
+
+function mostrarDatosG__() {
+    // if (ind == 0) {
+    //     document.getElementById("ant").disabled = true;  
+    //   } else {
+    //       document.getElementById("ant").disabled = false;  
+    //   }
+    //   if (ind == result.length-1) {
+    //       //ind--
+    //     document.getElementById("sig").disabled = true;  
+    //   } else {
+    //       document.getElementById("sig").disabled = false;  
+    //   }
+    tabla="";
+    for (i=0; i<result.length; i++){
+    tabla+=result[i]['nombre'] + ' ' +  result[i]['apellido1'] + ' ' + result[i]['apellido2'] + "<br>";
+    }
+    document.getElementById("resultado").innerHTML=tabla; 
+}
+
 function mostrarDatosC() {
     if (ind == 0) {
         document.getElementById("ant").disabled = true;  
@@ -192,6 +315,24 @@ function mostrarDatosC() {
     
     document.getElementById("form").elements[0].value=result[ind]["nombre"];
 }
+
+function mostrarDatosG() {
+    if (ind == 0) {
+        document.getElementById("ant").disabled = true;  
+      } else {
+          document.getElementById("ant").disabled = false;  
+      }
+      if (ind == result.length-1) {
+          //ind--
+        document.getElementById("sig").disabled = true;  
+      } else {
+          document.getElementById("sig").disabled = false;  
+      }
+    
+    document.getElementById("form").elements[0].value=result[ind]["taller"];
+    document.getElementById("form").elements[1].value=result[ind]["curso"];
+}
+
 
 function mostrarDatosE() {
     if (ind == 0) {
@@ -234,6 +375,14 @@ function crearM() {
    });
 }
 
+function crearG() {
+    cargaFormularioG();
+   $.post("crearG.php", data, function(datos, status){
+        resultado=JSON.parse(datos);
+        alert("Resultado: "+ resultado["resultado"]);        
+   });
+}
+
 function crearT() {
     cargaFormularioT();
    $.post("crearT.php", data, function(datos, status){
@@ -266,6 +415,24 @@ function asociar() {
    });
 }
 
+function alumnosAsignatura() {
+    cargaCalificaciones();
+   $.post("calificaciones.php", data, function(datos, status){
+        result=JSON.parse(datos);
+        // alert("Resultado: "+ resultado["resultado"]);        
+        mostrarFormularioNotas();
+   });
+}
+
+//Asociar alumnos a grupo
+function asociarA() {
+    cargaAlumnos();
+   $.post("asociarA.php", data, function(datos, status){
+        resultado=JSON.parse(datos);
+        alert("Resultado: "+ resultado["resultado"]);        
+   });
+}
+
 
 function consultar() {
     cargaFormulario();
@@ -285,6 +452,15 @@ function consultarA() {
    });    
 }
 
+function consultarAG() {
+    cargaFormularioAG();
+   $.post("consultarAG.php", data, function(datos, status){
+       ind=0;
+       result=JSON.parse(datos); 
+       mostrarDatosAG();     
+   });    
+}
+
 function consultarM() {
     cargaFormularioM();
    $.post("consultarM.php", data, function(datos, status){
@@ -301,7 +477,7 @@ function consultarT() {
        result=JSON.parse(datos);
        mostrarDatosT();     
    });    
-} 
+}
 
 function consultarTu() {
     cargaFormularioTu();
@@ -311,6 +487,15 @@ function consultarTu() {
        mostrarDatosTu();     
    });    
 } 
+
+function consultarG() {
+    cargaFormularioG();
+   $.post("consultarG.php", data, function(datos, status){
+       ind=0;
+       result=JSON.parse(datos);
+       mostrarDatosG();     
+   });  
+}  
 
 
 function consultarC() {
@@ -366,6 +551,13 @@ function borrarTu() {
     });
 }
 
+function borrarAG() {
+    cargaFormularioAG();
+    $.post("borrarAG.php", data, function (datos, status){
+        alert(datos);
+    });
+}
+
 function borrarC() {
     cargaFormularioC();
     $.post("borrarC.php", data, function (datos, status){
@@ -379,6 +571,14 @@ function borrarE() {
         alert(datos);
     });
 }
+
+function borrarG() {
+    cargaFormularioG();
+    $.post("borrarG.php", data, function (datos, status){
+        alert(datos);
+    });
+}
+
 
 
 function actualizar() {
@@ -498,6 +698,21 @@ function siguienteE() {
     mostrarDatosE();    
 }
 
+function anteriorG() {
+    if (ind > 0) {
+        ind--;
+    }
+    mostrarDatosG();
+
+}
+
+function siguienteG() {
+    if (ind < result.length-1){
+        ind++;
+    }
+    mostrarDatosG();    
+}
+
 function crud (tipo) {
     window.open("crud" + tipo + ".php", "_self");
 }
@@ -509,3 +724,4 @@ function crudUsuario() {
 function crudAsignaturas() {
     window.open("crudAsignaturas.php", "_self");
 }
+

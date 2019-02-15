@@ -12,7 +12,18 @@
     <div id=formulario>
     <h2>Mantenimiento de Asignaturas</h2>
     <form id="form" method='post' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
-    Asignatura: <input type='text' name='nombre' require/><br>
+    <!-- Especialidad: <select id='taller'> -->
+    <!-- <?php
+        $consulta = "select * from talleres";
+        $resultado = mysqli_query($con, $consulta);
+        echo "<option value=''></option>";
+        while ($fila = mysqli_fetch_array($resultado)){ 
+            extract($fila);
+            echo '<option value="'.$id.'">'. $nombre .'</option>';
+        }
+        ?>     -->
+    <!-- </select><br> -->
+    <!-- Asignatura: <input type='text' name='nombre' require/><br> -->
     Materia: <select id='materia'>
     <?php
         include('parametros.php');
@@ -20,9 +31,21 @@
         mysqli_query("SET NAMES 'utf8'");
         $consulta = "select * from materias";
         $resultado = mysqli_query($con, $consulta);
+        echo "<option value=''></option>";
         while ($fila = mysqli_fetch_array($resultado)){
             extract($fila);
             echo '<option value="'.$id.'">'. $nombre .'</option>';
+        }
+    ?>    
+    </select><br>
+    Grupo: <select id='grupo'>
+    <?php
+        $consulta = "select grupos.id as id, talleres.nombre as taller, cursos.nombre as curso from grupos inner JOIN talleres INNER JOIN cursos WHERE grupos.curso=cursos.id and grupos.taller=talleres.id";
+        $resultado = mysqli_query($con, $consulta);
+        echo "<option value=''></option>";
+        while ($fila = mysqli_fetch_array($resultado)){
+            extract($fila);
+            echo "<option value='$id'>$taller $curso</option>";
         }
     ?>    
     </select><br>
@@ -30,33 +53,14 @@
     <?php
         $consulta = "select * from usuarios where tipo = 3 and baja is null";
         $resultado = mysqli_query($con, $consulta);
+        echo "<option value=''></option>";
         while ($fila = mysqli_fetch_array($resultado)){
             extract($fila);
             echo '<option value="'.$dni.'">'.$nombre. ' ' . $apellido1 .'</option>';
         }
     ?>
     </select><br>
-    Taller: <select id='taller'>
-    <?php
-        $consulta = "select * from talleres";
-        $resultado = mysqli_query($con, $consulta);
-        while ($fila = mysqli_fetch_array($resultado)){
-            extract($fila);
-            echo '<option value="'.$id.'">'. $nombre .'</option>';
-        }
-    ?>    
-    </select><br>
-    Curso: <select id='curso'>
-    <?php
-        $consulta = "select * from cursos";
-        $resultado = mysqli_query($con, $consulta);
-        while ($fila = mysqli_fetch_array($resultado)){
-            extract($fila);
-            echo '<option value="'.$id.'">'. $nombre .'</option>';
-        }
-    ?>    
-    </select><br>
-    Evaluación: <select id='evaluacion'>
+    <!-- Evaluación: <select id='evaluacion'>
     <?php
         $consulta = "select * from evaluaciones";
         $resultado = mysqli_query($con, $consulta);
@@ -65,7 +69,7 @@
             echo '<option value="'.$id.'">'. $nombre .'</option>';
         }
     ?>    
-    </select><br>
+    </select><br> -->
     <button type='button' onclick='crearA()'>Crear</button>
     <!-- <button type='button' onclick='limpiar()'>Limpiar</button> -->
     <button type='button' onclick='consultarA()'>Consultar</button>

@@ -6,36 +6,31 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //print_r($_POST);
         //echo $_POST["nombre"];
-        // $nombre = test_input($_POST["nombre"]);
-        $materia = test_input($_POST["materia"]);
-        // $taller = test_input($_POST["taller"]);
-        $profesor = test_input($_POST["profesor"]);
-        $grupo = test_input($_POST["grupo"]);
-        // $evaluacion = test_input($_POST["evaluacion"]);
+        $taller = test_input($_POST["taller"]);
+        $curso = test_input($_POST["curso"]);
         // $hoy = getdate();
         // $dia = $hoy["mday"];
         // $mes = $hoy["mon"];
         // $año = $hoy["year"];
         // $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from asignaturas where materia=$materia and grupo=$grupo and profesor ='$profesor'";
+        $consulta = "select * from grupos where taller=$taller and curso =$curso";
+        // echo($consulta);
         $resultado = mysqli_query($con, $consulta);
         $num_filas = mysqli_num_rows($resultado);
         if ($num_filas == 0) {
-        $consulta = "insert into asignaturas (materia, profesor, grupo) values (" .
-                    "$materia, '$profesor', $grupo)" ;
-                    // echo( $consulta);
+        $consulta = "insert into grupos (curso, taller) values ('$curso', $taller)";
         $resultado = mysqli_query($con, $consulta);
         // if ($resultado){
-        echo json_encode(array("resultado"=>"Asignatura insertada"));
+        echo json_encode(array("resultado"=>"Grupo creado"));
         } else {
-            echo json_encode(array("resultado"=>"Asignatura existente"));
+            echo json_encode(array("resultado"=>"Grupo existente"));
             //$_POST["status"] = "Usuario existente"; 
             //print_r($_POST);
         }
       }
     
- 
+
 
     function test_input($data) {
         $data = trim($data);

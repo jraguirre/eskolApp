@@ -4,19 +4,15 @@
     $con = mysqli_connect($host, $user, $pass, $db_name) or die("<h1>Error al conectar con la base de datos</h1>");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $taller = test_input($_POST["taller"]);
-        $materia = test_input($_POST["materia"]);
-        $profesor = test_input($_POST["profesor"]);
         $grupo = test_input($_POST["grupo"]);
-        // // $evaluacion = test_input($_POST["evaluacion"]);
+        $alumno= test_input($_POST["alumno"]);
         $hoy = getdate();
         $dia = $hoy["mday"]; 
         $mes = $hoy["mon"];
         $año = $hoy["year"];
         $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from asignaturas";
-        // echo ($consulta);
+        $consulta = "delete from alumnos_grupo where grupo='$grupo' and alumno='$alumno'";
         // $inserta_and = false;
         // $todos = true;
         // if ($nombre != "") {
@@ -55,13 +51,12 @@
         //     $consulta = "select nombre, apellido1, apellido2, dni, email, tipo, alta from usuarios where baja is null";
         // }
         $resultado = mysqli_query($con, $consulta);
-
-        $json_array = array();
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-            $json_array[] = $fila;
+// echo $consulta;
+        if ($resultado) {
+            echo json_encode(array("resultado"=>"Alumnx borradx"));
+        } else {
+            echo json_encode(array("resultado"=>"Alumnx no borradx"));
         }
-        echo json_encode($json_array);
-
 
 
 

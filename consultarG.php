@@ -4,19 +4,22 @@
     $con = mysqli_connect($host, $user, $pass, $db_name) or die("<h1>Error al conectar con la base de datos</h1>");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $taller = test_input($_POST["taller"]);
-        $materia = test_input($_POST["materia"]);
-        $profesor = test_input($_POST["profesor"]);
-        $grupo = test_input($_POST["grupo"]);
-        // // $evaluacion = test_input($_POST["evaluacion"]);
+        $curso = test_input($_POST["curso"]);
+        $taller= test_input($_POST["taller"]);
         $hoy = getdate();
         $dia = $hoy["mday"]; 
         $mes = $hoy["mon"];
         $año = $hoy["year"];
         $fecha = $año . '-' . $mes . '-' . $dia;
         //$password = test_input($_POST["password"]);
-        $consulta = "select * from asignaturas";
-        // echo ($consulta);
+        //$consulta = "select id from grupos where taller=$taller";
+        //echo $consulta;
+        $resultado = mysqli_query($con, $consulta);
+        $fila = mysqli_fetch_assoc($resultado);
+        extract($fila);
+
+        $consulta = "select * from grupos";
+        // echo($consulta);
         // $inserta_and = false;
         // $todos = true;
         // if ($nombre != "") {
@@ -60,7 +63,7 @@
         while ($fila = mysqli_fetch_assoc($resultado)) {
             $json_array[] = $fila;
         }
-        echo json_encode($json_array);
+        echo json_encode($json_array); 
 
 
 

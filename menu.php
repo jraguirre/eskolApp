@@ -41,7 +41,8 @@
             <button type='button' onclick='consCalif()'>Consultar calificaciones</button>    
     <?php break;
        case 2:?>
-            <button type='button' onclick='consCalif()'>Consultar Coordinador calificaciones</button>
+            <button type='button' onclick='crud("GruposU")'>Grupos</button>
+            <button type='button' onclick='crud("Calif")'>Calificaciones</button>
         <?php break;
        break;
        case 3:?>
@@ -53,14 +54,15 @@
         <?php break;
        break;
        case 5: 
-            // echo("Opción 1");
-             ?>
+       // echo("Opción 1");
+       ?>
        <button type='button' onclick='crud("Usuario")'>Usuari@s</button>
        <button type='button' onclick='crud("Tutelas")'>Tutor@s</button>
        <button type='button' onclick='crud("Materias")'>Materias</button>
        <button type='button' onclick='crud("Asignaturas")'>Asignaturas</button>
        <button type='button' onclick='crud("Talleres")'>Especialidades</button>
        <button type='button' onclick='crud("Cursos")'>Cursos</button>
+       <button type='button' onclick='crud("Grupos")'>Grupos</button>
        <button type='button' onclick='crud("Evaluaciones")'>Evaluaciones</button>
     <?php
         break;
